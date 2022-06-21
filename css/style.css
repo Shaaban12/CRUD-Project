@@ -1,0 +1,185 @@
+:root{
+    --maine-color: #222;
+    --sucndry-color: #111;
+    --third-color: rebeccapurple;
+    --fourth-color: rgba(85, 85, 85, 0.303);
+    --text-color:white;
+    --focus-color:#000;
+}
+* {
+    margin: 0;
+    padding: 0;
+
+}
+body {
+    background: var(--maine-color);
+    color: white;
+    font-family: system-ui, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+} 
+.crud {
+    width: 80%;
+    margin: auto;
+}
+header {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background: var(--sucndry-color);
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: var(--text-color);
+}
+input:focus {
+    background: var(--focus-color);
+    /* transform: scale(1.1); */
+}
+.price {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ______ */
+
+.input .price .divInput {
+    position: relative;
+    
+}
+.input .price .divInput input {
+    width: auto;
+    color: white;
+    font-size: inherit;
+    font-family: inherit;
+    background-color: hsl(236, 32%, 26%);
+    padding: 0.35em 0.45em;
+    border: 1px solid transparent;
+    transition: background-color 0.3.s ease-in-out;
+    margin: 0;
+  }
+  
+  .input .price .divInput input:focus {
+    outline: none;
+  }
+  
+  .input .price .divInput input::placeholder {
+    color: hsla(0, 0%, 100%, 0.6);
+  }
+  
+  span {
+    position: absolute;
+    background-color: #3cefff;
+    transition: transform 0.1s ease;
+  }
+  
+  .bottom,
+  .top {
+    height: 1px;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+  }
+  
+  .left,
+  .right {
+    width: 1px;
+    top: 0;
+    bottom: 0;
+    transform: scaleY(0);
+  }
+  
+  .bottom {
+    bottom: 0;
+    transform-origin: bottom right;
+  }
+  
+  input:focus ~ .bottom {
+    transform-origin: bottom left;
+    transform: scaleX(1);
+  }
+  
+  .right {
+    right: 0;
+    transform-origin: top right;
+    transition-delay: 0.05s;
+  }
+  
+  input:focus ~ .right {
+    transform-origin: bottom right;
+    transform: scaleY(1);
+  }
+  
+  .top {
+    top: 0;
+    transform-origin: top left;
+    transition-delay: 0.15s;
+  }
+  
+  input:focus ~ .top {
+    transform-origin: top right;
+    transform: scaleX(1);
+  }
+  
+  .left {
+    left: 0;
+    transform-origin: bottom left;
+    transition-delay: 0.25s;
+  }
+  
+  input:focus ~ .left {
+    transform-origin: top left;
+    transform: scaleY(1);
+  }
+
+/* ______ */
+
+
+small {
+    background: red;
+    padding: 5px 2px;
+    border-radius: 4px;
+}
+small::before {
+    content: 'Total: ';
+}
+button {
+    width: 100%;
+    height: 30px;
+    background: var(--third-color);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--text-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.5s;
+}
+button:hover {
+    background: var(--focus-color);
+    border:1px solid var(--third-color) ;
+    letter-spacing: 1px;
+}
+.Serch {
+    display: flex;
+    justify-content: space-between;
+}
+.Serch button {
+    width: 45%;
+}
+table {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    background: var(--fourth-color);
+}
+table th {
+  text-transform: uppercase;
+}
+table th , table td {
+    padding: 5px;
+}
