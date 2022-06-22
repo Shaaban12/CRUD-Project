@@ -57,15 +57,16 @@ input:focus {
     color: white;
     font-size: inherit;
     font-family: inherit;
-    background-color: hsl(236, 32%, 26%);
+    background-color: var(--sucndry-color);
     padding: 0.35em 0.45em;
     border: 1px solid transparent;
-    transition: background-color 0.3.s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
     margin: 0;
   }
   
   .input .price .divInput input:focus {
     outline: none;
+    background-color: var(--focus-color);
   }
   
   .input .price .divInput input::placeholder {
