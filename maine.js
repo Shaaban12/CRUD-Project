@@ -7,6 +7,7 @@ let total = document.getElementById('total');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
+let btnDelateAll = document.getElementById('delete-all');
 
 // حساب اجمالى سعر المنتج
 function getTotal() {
@@ -27,7 +28,7 @@ if (localStorage.products != null) {
     dataProducts = [];
 }
 // انشاءعنصر
-submit.onclick = function () {
+submit.onclick =  ()=> {
     let newProduct = {
         title: title.value,
         price: price.value,
@@ -38,8 +39,7 @@ submit.onclick = function () {
         count: count.value,
         category: category.value
     }
-
-    // تكرار طباعه العنصر حسب العدد count
+    // count
     if (newProduct.count > 1){
         for(let i = 0; i < newProduct.count; i++){
             dataProducts.push(newProduct);
@@ -47,14 +47,12 @@ submit.onclick = function () {
     }else {
         dataProducts.push(newProduct);
     }
-
     // save localstorage
     localStorage.setItem('products', JSON.stringify(dataProducts));
     clearData();
     showData();
 }
 
-// Clear Data 
 function clearData() {
     title.value = '';
     price.value = '';
@@ -87,14 +85,12 @@ function showData() {
     document.getElementById('table').innerHTML = table;
     
     // Button delete all 
-    let btnDelateAll = document.getElementById('delete-all');
     if (dataProducts.length > 0){
         btnDelateAll.innerHTML = `
         <button id="BottonDeleteAll" onclick="deleteAll()" >Delete All (${dataProducts.length})</button>`;
     }else {
         btnDelateAll.innerHTML = '';
     }
-    showData();
 }
 
 //delete
@@ -110,4 +106,5 @@ function deleteAll() {
     dataProducts.splice(0);
     showData();
 }
+
 showData();
