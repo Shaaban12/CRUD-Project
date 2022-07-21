@@ -160,6 +160,9 @@ button {
     cursor: pointer;
     transition: 0.5s;
 }
+#delete-all {
+  margin: 5px 0;
+}
 button:hover {
     background: var(--focus-color);
     border:1px solid var(--third-color) ;

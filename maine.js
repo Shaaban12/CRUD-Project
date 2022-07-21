@@ -14,7 +14,7 @@ function getTotal() {
         total.innerHTML = (+price.value + +taxes.value + +ads.value )- +discount.value;
         total.style.background = 'green';
     }else {
-        total.innerHTML = 'Enter a valid';
+        total.innerHTML = 'Enter the valid';
         total.style.background = 'red';
     }
 }
@@ -37,13 +37,24 @@ submit.onclick = function () {
         total: total.innerHTML,
         count: count.value,
         category: category.value
-    };
-    dataProducts.push(newProduct);
-    localStorage.setItem("products", JSON.stringify(dataProducts));
+    }
+
+    // تكرار طباعه العنصر حسب العدد count
+    if (newProduct.count > 1){
+        for(let i = 0; i < newProduct.count; i++){
+            dataProducts.push(newProduct);
+        }
+    }else {
+        dataProducts.push(newProduct);
+    }
+
+    // save localstorage
+    localStorage.setItem('products', JSON.stringify(dataProducts));
     clearData();
     showData();
 }
-// Clear Data
+
+// Clear Data 
 function clearData() {
     title.value = '';
     price.value = '';
@@ -54,6 +65,7 @@ function clearData() {
     count.value = '';
     category.value = '';
 }
+
 //Read
 function showData() {
     let table='';
@@ -69,10 +81,20 @@ function showData() {
             <td>${dataProducts[i].total}</td>
             <td><button id="update">update</button></td>
             <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
-        </tr>`
+        </tr>`;
 
     }
     document.getElementById('table').innerHTML = table;
+    
+    // Button delete all 
+    let btnDelateAll = document.getElementById('delete-all');
+    if (dataProducts.length > 0){
+        btnDelateAll.innerHTML = `
+        <button id="BottonDeleteAll" onclick="deleteAll()" >Delete All (${dataProducts.length})</button>`;
+    }else {
+        btnDelateAll.innerHTML = '';
+    }
+    showData();
 }
 
 //delete
@@ -81,8 +103,11 @@ function deleteData(i) {
     localStorage.products = JSON.stringify(dataProducts);
     showData();
 }
-// function deleteAll() {
-//     dataProducts = [];
-//     localStorage.products = JSON.parse(dataProducts);
-//     showData();
-// }
+
+// delete all
+function deleteAll() {
+    localStorage.clear();
+    dataProducts.splice(0);
+    showData();
+}
+showData();
