@@ -8,6 +8,8 @@ let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 let btnDelateAll = document.getElementById('delete-all');
+let mood = 'create';
+let indexForUpdating;
 
 // حساب اجمالى سعر المنتج
 function getTotal() {
@@ -40,13 +42,21 @@ submit.onclick =  ()=> {
         category: category.value
     }
     // count
-    if (newProduct.count > 1){
-        for(let i = 0; i < newProduct.count; i++){
+    if (mood === 'create') {
+        if (newProduct.count > 1){
+            for(let i = 0; i < newProduct.count; i++){
+                dataProducts.push(newProduct);
+            }
+        }else {
             dataProducts.push(newProduct);
         }
     }else {
-        dataProducts.push(newProduct);
+        dataProducts[indexForUpdating] = newProduct ;
+        count.style.display = 'block';
+        submit.innerHTML = 'Create';
+        mood = 'create'
     }
+    
     // save localstorage
     localStorage.setItem('products', JSON.stringify(dataProducts));
     clearData();
@@ -66,6 +76,7 @@ function clearData() {
 
 //Read
 function showData() {
+    getTotal();
     let table='';
     for (let i = 0; i < dataProducts.length; i++) {
         table += `
@@ -116,6 +127,15 @@ function updateProductData(i) {
     ads.value = dataProducts[i].ads;
     discount.value = dataProducts[i].discount;
     category.value = dataProducts[i].category;
+    getTotal();
+    count.style.display = 'none';
+    submit.innerHTML = 'Update';
+    mood = 'updateing';
+    indexForUpdating = i;
+    scroll({
+        top: 0,
+        behavior:'smooth'
+    })
 }
 
 showData();
