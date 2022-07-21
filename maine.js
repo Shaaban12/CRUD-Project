@@ -77,7 +77,8 @@ function showData() {
             <td>${dataProducts[i].ads}</td>
             <td>${dataProducts[i].discount}</td>
             <td>${dataProducts[i].total}</td>
-            <td><button id="update">update</button></td>
+            <td>${dataProducts[i].category}</td>
+            <td><button onclick="updateProductData(${i})" id="update">update</button></td>
             <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
         </tr>`;
 
@@ -105,6 +106,16 @@ function deleteAll() {
     localStorage.clear();
     dataProducts.splice(0);
     showData();
+}
+
+// Update
+function updateProductData(i) {
+    title.value = dataProducts[i].title;
+    price.value = dataProducts[i].price;
+    taxes.value = dataProducts[i].taxes;
+    ads.value = dataProducts[i].ads;
+    discount.value = dataProducts[i].discount;
+    category.value = dataProducts[i].category;
 }
 
 showData();
