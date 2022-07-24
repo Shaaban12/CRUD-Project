@@ -56,10 +56,10 @@
             <button id="submit">Create</button>
         </section>
         <section class="outPut">
-            <input placeholder="Serch" type="text" id="serchBox">
+            <input onkeyup="search(this.value)" type="text" id="searchBox">
             <div class="Serch">
-                <button id="serchByName">Serch By Name</button>
-                <button id="serchByCategory">Serch By Category</button>
+                <button onclick="getSearchMood(this.id)" id="title">Serch By Name</button>
+                <button onclick="getSearchMood(this.id)" id="category">Serch By Category</button>
             </div>
             <div id="delete-all">
 

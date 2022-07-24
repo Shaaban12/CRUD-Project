@@ -172,8 +172,14 @@ button:hover {
     display: flex;
     justify-content: space-between;
 }
+
 .Serch button {
-    width: 45%;
+    width: 49%;
+    margin-top: 5px;
+}
+
+#searchBox {
+  display: none;
 }
 table {
     width: 100%;

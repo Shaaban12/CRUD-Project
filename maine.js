@@ -32,25 +32,28 @@ if (localStorage.products != null) {
 // انشاءعنصر
 submit.onclick =  ()=> {
     let newProduct = {
-        title: title.value,
+        title: title.value.toLowerCase(),
         price: price.value,
         taxes: taxes.value,
         ads: ads.value,
         discount: discount.value,
         total: total.innerHTML,
         count: count.value,
-        category: category.value
+        category: category.value.toLowerCase()
     }
     // count
-    if (mood === 'create') {
+    if (mood === 'create' && count.value < 100 && title.value != '' && price.value != '' && category.value != '') {
         if (newProduct.count > 1){
             for(let i = 0; i < newProduct.count; i++){
                 dataProducts.push(newProduct);
             }
-        }else {
+        }
+        else {
             dataProducts.push(newProduct);
         }
-    }else {
+        clearData();
+    }
+    else {
         dataProducts[indexForUpdating] = newProduct ;
         count.style.display = 'block';
         submit.innerHTML = 'Create';
@@ -59,7 +62,7 @@ submit.onclick =  ()=> {
     
     // save localstorage
     localStorage.setItem('products', JSON.stringify(dataProducts));
-    clearData();
+    
     showData();
 }
 
@@ -81,7 +84,7 @@ function showData() {
     for (let i = 0; i < dataProducts.length; i++) {
         table += `
         <tr>
-            <td>${i}</td>
+            <td>${i+1}</td>
             <td>${dataProducts[i].title}</td>
             <td>${dataProducts[i].price}</td>
             <td>${dataProducts[i].taxes}</td>
@@ -137,5 +140,71 @@ function updateProductData(i) {
         behavior:'smooth'
     })
 }
+
+// search mood 
+let searchMood = 'title'
+function getSearchMood(id) {
+    let searchBox = document.getElementById('searchBox');
+    if (id == 'title') {
+        searchMood = 'title';
+    }else {
+        searchMood = 'category';
+    }
+    searchBox.placeholder ='Search by '+ searchMood ;
+    searchBox.style.display = 'block';
+    searchBox.focus();
+}
+
+// Search 
+ 
+function search(value) {
+    let table='';
+    // البحث من خلال الاسم
+    for (let i = 0 ; i < dataProducts.length; i++) {
+        console.log(value);
+        if(searchMood == 'title') {
+            if (dataProducts[i].title.includes(value)) {
+                table += `
+                <tr>
+                    <td>${i}</td>
+                    <td>${dataProducts[i].title}</td>
+                    <td>${dataProducts[i].price}</td>
+                    <td>${dataProducts[i].taxes}</td>
+                    <td>${dataProducts[i].ads}</td>
+                    <td>${dataProducts[i].discount}</td>
+                    <td>${dataProducts[i].total}</td>
+                    <td>${dataProducts[i].category}</td>
+                    <td><button onclick="updateProductData(${i})" id="update">update</button></td>
+                    <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
+                </tr>`;
+            }
+        }
+        
+        // البحث من خلال النوع
+        else {
+            if (dataProducts[i].category.includes(value)) {
+                table += `
+                <tr>
+                    <td>${i}</td>
+                    <td>${dataProducts[i].title}</td>
+                    <td>${dataProducts[i].price}</td>
+                    <td>${dataProducts[i].taxes}</td>
+                    <td>${dataProducts[i].ads}</td>
+                    <td>${dataProducts[i].discount}</td>
+                    <td>${dataProducts[i].total}</td>
+                    <td>${dataProducts[i].category}</td>
+                    <td><button onclick="updateProductData(${i})" id="update">update</button></td>
+                    <td><button onclick="deleteData(${i})" id="delete">delete</button></td>
+                </tr>`;
+            }
+        }
+        document.getElementById('table').innerHTML = table;
+    }
+}
+
+
+
+
+
 
 showData();
